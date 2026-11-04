@@ -26,16 +26,13 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
         with:
-          # Skip the action's built-in package install.
-          # The 'tools' package it used to grab no longer exists,
-          # and we install exactly what we need in the next step.
           packages: ''
           accept-android-sdk-licenses: false
           log-accepted-android-sdk-licenses: false
 
       - name: Install Android SDK packages
         run: |
-          yes | sdkmanager --licenses >/dev/null
+          yes | sdkmanager --licenses >/dev/null || true
           sdkmanager --install \
             "platform-tools" \
             "platforms;android-34" \
@@ -46,15 +43,12 @@ jobs:
         with:
           gradle-version: "8.7"
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
       - name: Build debug APK
-        run: ./gradlew --no-daemon :app:assembleDebug
+        run: gradle --no-daemon :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: OS27Launcher-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
