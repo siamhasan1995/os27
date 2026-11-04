@@ -21,19 +21,33 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+          cache: gradle
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          # Skip the action's built-in package install.
+          # The 'tools' package it used to grab no longer exists,
+          # and we install exactly what we need in the next step.
+          packages: ''
+          accept-android-sdk-licenses: false
+          log-accepted-android-sdk-licenses: false
 
       - name: Install Android SDK packages
         run: |
           yes | sdkmanager --licenses >/dev/null
-          sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-34" \
+            "build-tools;34.0.0"
 
       - name: Set up Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.7"
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Build debug APK
         run: ./gradlew --no-daemon :app:assembleDebug
