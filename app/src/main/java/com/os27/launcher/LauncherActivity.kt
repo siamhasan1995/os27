@@ -3,6 +3,7 @@ package com.os27.launcher
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.*
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -67,7 +68,7 @@ class LauncherActivity : Activity() {
         pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, offset: Float, px: Int) {
                 val lib = (pager.adapter?.itemCount ?: 1) - 1
-                val f = (position + offset - (lib - 1)).coerceIn(0f, 1f)   // 0 = home, 1 = App Library
+                val f = (position + offset - (lib - 1)).coerceIn(0f, 1f)
                 dock.alpha = 1 - f; dots.alpha = 1 - f
                 dock.visibility = if (f > 0.99f) View.INVISIBLE else View.VISIBLE
                 root.setBackgroundColor(Color.argb((f * 120).toInt(), 0, 0, 0))
