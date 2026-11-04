@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="service_desc">Detects when YouTube, Facebook or Instagram opens on the feed tab and switches to a calmer tab. Reads only on-screen tab labels in those three apps and sends nothing anywhere.</string>
+    <string name="app_name">OS27 Launcher</string>
+    <string name="svc_label">OS27 Full-Screen Gestures</string>
+    <string name="svc_desc">Draws a home indicator and edge swipe zones: swipe up = Home, swipe up and hold = Recents, swipe from left/right edge = Back.</string>
 </resources>
