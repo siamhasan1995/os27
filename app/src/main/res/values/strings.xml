@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OS27 Launcher</string>
+    <string name="svc_label">OS27 Full-Screen Gestures</string>
+    <string name="svc_desc">Draws a home indicator and edge swipe zones: swipe up = Home, swipe up and hold = Recents, swipe from left/right edge = Back.</string>
+</resources>
